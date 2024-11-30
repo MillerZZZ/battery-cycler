@@ -23,7 +23,7 @@ beginCharging() {
 consumeCPU() {
     log "Consuming CPU with $NUM_PROCESSES processes..."
     for i in $(seq 1 $NUM_PROCESSES); do
-        cpu_consume.sh &
+        ./cpu_consume.sh &
         pid_list+=("$!")
     done
     log "Started CPU-consuming processes: ${pid_list[@]}"
