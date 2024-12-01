@@ -2,6 +2,8 @@
 *.log
 *.o
 
+notes.txt
+
 dependencies/smc-command/smc
 bin/
 log/
