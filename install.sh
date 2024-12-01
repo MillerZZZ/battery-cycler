@@ -3,7 +3,6 @@
 cp ./dependencies/smcFanControl/smc-command/smc ./bin/smc
 make -C ./dependencies/smcFanControl/smc-command/ clean
 
-bash ./dependencies/battery/update.sh
 cp ./dependencies/battery/battery.sh ./bin/battery
 
 cp ./scripts/* ./bin/
