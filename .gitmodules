@@ -1,9 +1,12 @@
 [submodule "dependencies/volumeshader_bm"]
 	path = dependencies/volumeshader_bm
 	url = https://github.com/MillerZZZ/volumeshader_bm.git
+	branch = minimal
 [submodule "dependencies/battery"]
 	path = dependencies/battery
-	url = https://github.com/actuallymentor/battery.git
+	url = https://github.com/MillerZZZ/battery.git
+	branch = command-line
 [submodule "dependencies/smcFanControl"]
 	path = dependencies/smcFanControl
-	url = https://github.com/hholtmann/smcFanControl
+	url = https://github.com/MillerZZZ/smcFanControl.git
+	branch = smc-command
