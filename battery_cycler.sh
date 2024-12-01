@@ -7,23 +7,23 @@ NUM_PROCESSES=10
 log() {
     local timestamp=$(date "+%Y-%m-%d %H:%M:%S")
     local message="$timestamp $*"
-    echo "$message" | tee -a ~/battery_control.log
+    echo "$message" | tee -a ./log/battery_cycler.log
 }
 
 stopCharging() {
     log "Stopping charging..."
-    sudo smc -k CH0I -w 02
+    sudo ./bin/smc -k CH0I -w 02
 }
 
 beginCharging() {
     log "Starting charging..."
-    sudo smc -k CH0I -w 00
+    sudo ./bin/smc -k CH0I -w 00
 }
 
 consumeCPU() {
     log "Consuming CPU with $NUM_PROCESSES processes..."
     for i in $(seq 1 $NUM_PROCESSES); do
-        ./cpu_consume.sh &
+        ./bin/cpu_consume.sh &
         pid_list+=("$!")
     done
     log "Started CPU-consuming processes: ${pid_list[@]}"
@@ -44,7 +44,7 @@ stopConsumeCPU() {
 consumeGPU() {
     log "Consuming GPU by opening $NUM_PROCESSES Chrome windows..."
     for i in $(seq 1 $NUM_PROCESSES); do
-        open -na "Google Chrome" --args --new-window "https://millerzzz.github.io/vsbm.html" &
+        open -na "Google Chrome" --args --new-window "file://$(realpath ./bin/vsbm_inline.html)" &
         gpu_pid_list+=("$!")
     done
     log "Started GPU-consuming Chrome windows: ${gpu_pid_list[@]}"
@@ -60,7 +60,7 @@ stopConsumeGPU() {
 
 resetSMC() {
     log "Resetting SMC to default..."
-    sudo smc -k CH0I -w 00
+    sudo ./bin/smc -k CH0I -w 00
 }
 
 shutdownAll() {
@@ -73,7 +73,7 @@ shutdownAll() {
 }
 
 checkBattery() {
-    battery_status=$(battery status)
+    battery_status=$(./bin/battery status)
     battery_percentage=$(log "$battery_status" | grep -o '[0-9]\+%' | awk -F'%' '{print $1}')
     if [ -z "$battery_percentage" ]; then
         log "Failed to get battery percentage, defaulting to 0."
