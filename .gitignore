@@ -2,8 +2,9 @@
 *.log
 *.o
 
+release/
+
 notes.txt
 
-dependencies/smc-command/smc
 bin/
 log/
