@@ -2,6 +2,17 @@
 
 set +H
 
+# requires sudo
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Please run as root."
+    exec sudo "$0" "$@"
+    exit 1
+fi
+
+echo "Running as root."
+
+echo "Starting battery cycler..."
+
 NUM_PROCESSES=10
 
 log() {
