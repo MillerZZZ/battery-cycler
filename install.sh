@@ -1,4 +1,4 @@
-[ ! -d "./bin" ] && mkdir ./bin
+[ ! -d "./bin/" ] && mkdir ./bin/
 [ ! -f "./dependencies/smcFanControl/smc-command/smc" ] && make -C ./dependencies/smcFanControl/smc-command/
 cp ./dependencies/smcFanControl/smc-command/smc ./bin/smc
 make -C ./dependencies/smcFanControl/smc-command/ clean
